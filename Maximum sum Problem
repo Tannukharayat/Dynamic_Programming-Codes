@@ -1,0 +1,20 @@
+/******* Given a number n, we can divide it in only three parts n/2, n/3 and n/4 (we will consider only integer part). The task is to find
+the maximum sum we can make by dividing number in three parts recursively and summing up them together. ******/
+
+int main() 
+{
+	cin>>t;
+	for(int i=0;i<t;i++)
+	{
+	    cin>>n;
+	    int dp[n+1];
+	    dp[0]=0;
+	    dp[1]=1;
+	    for(int j=1;j<=n;j++)
+	    {
+	        dp[j]=max(j,max(j/2,dp[j/2])+max(j/3,dp[j/3])+max(j/4,dp[j/4]));
+	    }
+	    cout<<dp[n]<<endl;
+	}
+	return 0;
+}
