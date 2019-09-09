@@ -1,0 +1,47 @@
+/**** Suppose you have N eggs and you want to determine from which floor in a K-floor building you can drop an egg such that it doesn't
+break. You have to determine the minimum number of attempts you need in order find the critical floor in the worst case while using the 
+best strategy.There are few rules given below. 
+
+1- An egg that survives a fall can be used again.
+2- A broken egg must be discarded.
+3- The effect of a fall is the same for all eggs.
+4- If the egg doesn't break at a certain floor, it will not break at any floor below.
+5- If the eggs breaks at a certain floor, it will break at any floor above.
+******/
+
+int main() 
+{
+	cin>>t;
+	for(int i=0;i<t;i++)
+	{
+	    cin>>x>>y;
+	    int egg[x+1][y+1];
+	    memset(egg,0,sizeof(egg));
+	    for(int j=1;j<=x;j++)
+	    {
+	        egg[j][1]=1;
+	        egg[j][0]=0;
+	    }
+	    for(int j=1;j<=y;j++)
+	    {
+	        egg[1][j]=j;
+	    }
+	    for(int j=2;j<=x;j++)
+	    {
+	        for(int k=2;k<=y;k++)
+	        {
+	            egg[j][k]=INT_MAX;
+	            for(int l=1;l<=k;l++)
+	            {
+	                int res=1+max(egg[j-1][l-1],egg[j][k-l]);
+	                if(res<egg[j][k])
+	                {
+	                    egg[j][k]=res;
+	                }
+	            }
+	        }
+	    }
+	    cout<<egg[x][y]<<endl;
+	}
+	return 0;
+}
