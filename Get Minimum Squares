@@ -1,0 +1,29 @@
+/***** Given a number N. You need to write a program to print the minimum number of squares of this number that sums to N.
+For Example: If N = 100 , N can be expressed as (10*10) and also as (5*5 + 5*5 + 5*5 + 5*5) but the output will be 1 as minimum number 
+of square is 1 , i.e (10*10). ****/
+
+int main() 
+{
+	cin>>t;
+	for(int i=0;i<t;i++)
+	{
+	    cin>>n;
+	    long long int dp[n+1];
+	    dp[0]=0;
+	    dp[1]=1;
+	    dp[2]=2;
+	    dp[3]=3;
+	    for(int j=4;j<=n;j++)
+	    {
+	        dp[j]=INT_MAX;
+	        for(int k=1;k*k<=j;k++)
+	        {
+	            if(k*k<=j)
+	            dp[j]=min(dp[j],1+dp[j-k*k]);
+	            else break;
+	        }
+	    }
+	   cout<<dp[n]<<endl;
+	}
+	return 0;
+}
