@@ -1,0 +1,28 @@
+/******** Given a string which includes characters a, b, c, ..., z. Where value of a=1, b=2, ..., z=26. Now find the largest increasing 
+sub sequence in the string and print it's length *******/
+
+int main() 
+{
+    cin>>t;
+    for(int i=0;i<t;i++)
+    {
+        string s;
+        cin>>s;
+        int lis[s.length()+1];
+        for(int j=0;j<s.length();j++)
+        {
+            lis[j]=1;
+        }
+        for(int j=1;j<s.length();j++)
+        {
+            for(int k=0;k<j;k++)
+            {
+                if(s[j]>s[k]&&lis[j]<lis[k]+1)
+                lis[j]=lis[k]+1;
+            }
+        }
+        sort(lis,lis+s.length());
+        cout<<lis[s.length()-1]<<endl;
+    }
+	return 0;
+}
