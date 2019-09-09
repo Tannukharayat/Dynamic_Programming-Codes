@@ -1,0 +1,29 @@
+/******** You are given n days and for each day (di) you could either perform a high effort tasks (hi) or a low effort tasks (li) or no 
+task with the constraint that you can choose a high-effort tasks only if you chose no task on the previous day. Write a program to find 
+the maximum amount of tasks you can perform within these n days ******/
+
+int main() 
+{
+	cin>>t;
+	for(int i=0;i<t;i++)
+	{
+	    cin>>n;
+	    long long int arrh[n+1],arrl[n+1],dp[n+1];
+	    for(int j=0;j<n;j++)
+	    {
+	        cin>>arrh[j];
+	    }
+	     for(int j=0;j<n;j++)
+	    {
+	        cin>>arrl[j];
+	    }
+	    dp[0]=0;
+	    dp[1]=arrh[0];
+	    for(int j=2;j<=n;j++)
+	    {
+	        dp[j]=max(dp[j-2]+arrh[j-1],dp[j-1]+arrl[j-1]);
+	    }
+	    cout<<dp[n]<<endl;
+	}
+	return 0;
+}
