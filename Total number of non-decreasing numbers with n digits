@@ -1,0 +1,33 @@
+/******* A number is non-decreasing if every digit (except the first one) is greater than or equal to previous digit. For example, 223, 4455567, 899, are non-decreasing numbers.
+So, given the number of digits n, you are required to find the count of total non-decreasing numbers with n digits. *******/
+
+#include <bits/stdc++.h>
+using namespace std;
+long long int t,n,ans;
+int main() 
+{
+	cin>>t;
+	for(int i=0;i<t;i++)
+	{
+	    ans=0;
+	    cin>>n;
+	    long long int dp[1000][1000];
+	    memset(dp,0,sizeof(dp));
+	    for(int j=0;j<=9;j++)
+	    dp[j][1]=1;
+	    for(int j=0;j<=9;j++)
+	    {
+	        for(int k=2;k<=n;k++)
+	        {
+	            for(int x=0;x<=j;x++)
+	            {
+	                dp[j][k]+=dp[x][k-1];
+	            }
+	        }
+	    }
+	    for(int j=0;j<=9;j++)
+	    ans+=dp[j][n];
+	    cout<<ans<<endl;
+	}
+	return 0;
+}
