@@ -1,0 +1,38 @@
+/******** Given two strings X and Y, and two values costX and costY. We need to find minimum cost required to make the given two strings 
+identical. We can delete characters from both the strings. The cost of deleting a character from string X is costX and from Y is costY.
+Cost of removing all characters from a string is same.  ***********/
+
+#include <bits/stdc++.h>
+using namespace std;
+long long int t,costX,costY;
+string x,y;
+int main() 
+{
+	cin>>t;
+	for(int i=0;i<t;i++)
+	{
+	    cin>>costX>>costY;
+	    cin>>x>>y;
+	    int dp[x.length()+1][y.length()+1];
+	    memset(dp,0,sizeof(dp));
+	    for(int j=0;j<=x.length();j++)
+	        dp[j][0]=j*costX;
+	    for(int j=0;j<=y.length();j++)
+	       dp[0][j]=j*costY;
+	   for(int j=0;j<=x.length();j++)
+	   {
+	       for(int k=0;k<=y.length();k++)
+	       {
+	           if(j==0)
+	           dp[j][k]=k*costY;
+	           else if(k==0)
+	           dp[j][k]=j*costX;
+	           else if(x[j-1]==y[k-1])
+	           dp[j][k]=dp[j-1][k-1];
+	           else dp[j][k]=min(costY+dp[j][k-1],costX+dp[j-1][k]);
+	       }
+	   }
+	   cout<<dp[x.length()][y.length()]<<endl;
+	}
+	return 0;
+}
