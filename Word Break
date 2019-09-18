@@ -1,0 +1,53 @@
+/* Given an input string and a dictionary of words, find out if the input string can be segmented into a space-separated sequence of
+dictionary words */
+
+
+#include <bits/stdc++.h>
+using namespace std;
+long long int t,n;
+string s,f;
+int dp[10001 ];
+int funct(int i,string f,map<string,int> mp)
+{
+    if(i==f.length())
+    return 1;
+    
+    for(int j=1;j+ i <= f.length();j++)
+    {
+       
+        string new_st=f.substr(i, j );
+       // cout << new_st << " " ; 
+        if(mp[new_st]==1)
+        {
+           // cout<<"*"<<new_st<<"*";
+            if(funct(i+j,f,mp)==1)
+            { 
+                dp [ i ] = 1 ; 
+                 return dp[i];
+            }
+        }
+    }
+    dp [ i ] = 0 ; 
+    return dp[i] ;
+}
+int main() 
+{
+	cin>>t;
+	for(int i=0;i<t;i++)
+	{
+	    cin>>n;
+	    memset(dp,-1,sizeof(dp));
+	    map<string,int> mp;
+	    for(int j=0;j<n;j++)
+	    {
+	        cin>>s;
+	        mp[s]=1;
+	    }
+	    cin>>f;
+	    if(funct(0,f,mp)==1)
+	    {
+	        cout<<"1"<<endl;
+	    }else cout<<"0"<<endl;
+	}
+	return 0;
+}
