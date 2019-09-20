@@ -1,0 +1,41 @@
+/* Given a integer K. Task is Print All binary string of size K (Given number)*/
+
+#include <bits/stdc++.h>
+using namespace std;
+int t,n,x;
+int mod=1e9 + 7;
+int a[1000],b[1000];
+void generate(int len,char s[],int n)
+{
+    if(len==n-1)
+    {
+        s[len+1]='\0';
+        cout<<s<<endl;
+        return;
+    }
+    if(s[len]=='0')
+    {
+        s[len+1]='0';
+        generate(len+1,s,n);
+        s[len+1]='1';
+        generate(len+1,s,n);
+    }else 
+    {
+        s[len+1]='0';
+        generate(len+1,s,n);
+    }
+}
+int main() 
+{
+	cin>>t;
+	for(int i=0;i<t;i++)
+	{
+	    cin>>n;
+	    char s1[n+1],s0[n+1];
+	    s1[0]='1';
+	    s0[0]='0';
+	    generate(0,s0,n);
+	    generate(0,s1,n);
+	}
+	return 0;
+}
