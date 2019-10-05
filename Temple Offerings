@@ -1,0 +1,44 @@
+/* Consider a devotee wishing to give offerings to temples along a mountain range. The temples are located in a row at different heights.
+Devotee is very religious and wants to offer each temple at least one offering. If two adjacent temples are at different altitudes, then 
+the temple that is higher up should receive more offerings than the one that is lower down. If two adjacent temples are at the same height
+, then their offerings relative to each other does not matter. Find the minimum number of offerings to bring. */
+
+
+#include <bits/stdc++.h>
+using namespace std;
+long long int t,n;
+int main() 
+{
+	cin>>t;
+	for(int i=0;i<t;i++)
+	{
+	    cin>>n;
+	    long long int arr[n],dpL[n],dpR[n],ans=0;
+	    for(int j=0;j<n;j++)
+	    {
+	        cin>>arr[j];
+	        dpL[j]=1;
+	        dpR[j]=1;
+	    }
+	   for(int j=1;j<n;j++)
+	   {
+	        if(arr[j]>arr[j-1])
+	        {
+	            dpL[j]=dpL[j-1]+1;
+	        }
+	   }
+	   for(int j=n-2;j>=0;j--)
+	   {
+	        if(arr[j]>arr[j+1])
+	        {
+	            dpR[j]=dpR[j+1]+1;
+	        }
+	   }
+	   for(int j=0;j<n;j++)
+	   {
+	       ans+=max(dpR[j],dpL[j]);
+	   }
+	   cout<<ans<<endl;
+	}
+	return 0;
+}
