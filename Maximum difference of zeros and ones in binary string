@@ -1,0 +1,38 @@
+/* Given a binary string of 0s and 1s. The task is to find the maximum difference of number of 0s and number of 1s (number of 0s – number
+of 1s) in the substrings of string */
+
+
+#include <bits/stdc++.h>
+using namespace std;
+long long int t;
+string s;
+int main() 
+{
+    cin>>t;
+    for(int i=0;i<t;i++)
+    {
+        cin>>s;
+        int n=s.length();
+        int arr[n];
+        int cnt=0;
+        int sum=0,ans=0;
+        for(int j=0;j<n;j++)
+        {
+            if(s[j]=='0')
+            arr[j]=1;
+            else 
+            {
+                arr[j]=-1;
+                cnt++;
+            }
+            sum+=arr[j];
+            sum=max(0,sum);
+            ans=max(sum,ans);
+        }
+        if(cnt==n)
+        cout<<"-1"<<endl;
+        else
+        cout<<ans<<endl;
+    }
+	return 0;
+}
