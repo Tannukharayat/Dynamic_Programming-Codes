@@ -1,0 +1,62 @@
+/* You are a binary string A consisting of 0s and 1s only. You are allowed to do exactly one move that is you have to choose two indices i and j (1 ≤ i ≤ j ≤ |A| where |A| is string length) and toggle all the characters at position k where i ≤ k ≤ j. Toggling means changing 0 to 1 and 1 to 0.
+
+The task is that after exactly one move you have to obtain the maximum possible number of 1's.*/
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() 
+{
+	int t;
+	cin>>t;
+	while(t--)
+	{
+	    string s;
+	    cin>>s;
+	    
+	    int st=0,e=0,ini=0,sum=0,ans=0,onee=0;
+	    for(int i=0;i<s.length();i++)
+	    {
+	        if(s[i]=='1')
+	        onee++;
+	        if(s[i]=='0')
+	        {
+	            sum+=1;
+	        }else sum-=1;
+	         if(ans<sum)
+	        {
+	            ans=sum;
+	            st=ini;
+	            e=i;
+	        }else if(sum<0)
+	        {
+	            sum=0;
+	            ini=i+1;
+	        }
+	    }
+	    if(ans<sum)
+	        {
+	            ans=sum;
+	            st=ini;
+	            e=s.length()-1;
+	        }
+	    int one=0;
+	    if(onee==s.length())
+	    {
+	        cout<<onee-1<<endl;
+	        continue;
+	    }
+	    if(ans>0)
+	    {
+	        for(int i=0;i<s.length();i++)
+	        {
+	            if(i>=st&&i<=e)
+	            {
+	                one+=(1^(s[i]-'0'));
+	            }else one+=s[i]-'0';
+	        }
+	    }
+	    cout<<one<<endl;
+	}
+	return 0;
+}
