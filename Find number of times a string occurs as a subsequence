@@ -1,0 +1,36 @@
+/* Given two strings S1 and S2, find the number of times the second string occurs in the first string, whether continuous or discontinuous*/
+
+#include <bits/stdc++.h>
+using namespace std;
+int t,n1,n2;
+int main() 
+{
+	cin>>t;
+	for(int i=0;i<t;i++)
+	{
+	    cin>>n1>>n2;
+	    string s1,s2;
+	    cin>>s1>>s2;
+	    int dp[s1.length()+1][s2.length()+1];
+	    for(int j=0;j<=s2.length();j++)
+	    {
+	        dp[0][j] = 0;
+	    }
+	    for(int j=0;j<=s1.length();j++)
+	    {
+	        dp[j][0] = 1;
+	    }
+	    for(int j=1;j<=s1.length();j++)
+	    {
+	        for(int k=1;k<=s2.length();k++)
+	        {
+	            if(s1[j-1]==s2[k-1])
+	            {
+	                dp[j][k]=dp[j-1][k]+dp[j-1][k-1];
+	            }else dp[j][k]=dp[j-1][k];
+	        }
+	    }
+	    cout<<dp[s1.length()][s2.length()]<<endl;
+	}
+	return 0;
+}
