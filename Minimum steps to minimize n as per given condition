@@ -1,0 +1,46 @@
+/* Given a number n, count minimum steps to minimise it to 1 according to the following criteria:
+
+1- If n is divisible by 2 then we may reduce n to n/2.
+2- If n is divisible by 3 then you may reduce n to n/3.
+3- Decrement n by 1.
+*/
+
+
+ #include <bits/stdc++.h>
+using namespace std;
+int funct_minimise( int n , int cnt , int dp[])
+{
+    if(dp[n] != -1)
+    return dp[n];
+    if( n == 1 )
+    {
+        return 0;
+    }
+    if( n < 1 )
+    {
+        return INT_MAX;
+    }
+    cnt++;
+    int a=INT_MAX, b=INT_MAX, c= INT_MAX;
+    if(n%2==0)
+    a = 1+ funct_minimise( n/2, cnt ,dp );
+    if( n % 3 == 0)
+    b = 1 + funct_minimise( n/3, cnt , dp );
+    c = 1 + funct_minimise ( n-1, cnt , dp );
+    dp[n]= min ( a , min ( b ,  c ) );
+}
+int main() 
+{
+	int t , n ;
+	cin >> t ;
+	while ( t-- )
+	{
+	    cin >> n ;
+	    int c = 0;
+	    int dp[n+1] = {0};
+	    memset( dp , -1  , sizeof(dp));
+	    c = funct_minimise( n , c , dp );
+	    cout <<  c << endl ;
+	}
+	return 0;
+}
