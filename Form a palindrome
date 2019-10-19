@@ -1,0 +1,51 @@
+/* Given a string, find the minimum number of characters to be inserted to convert it to palindrome.
+For Example:
+1- ab: Number of insertions required is 1. bab or aba
+2- aa: Number of insertions required is 0. aa
+3- abcd: Number of insertions required is 3. dcbabcd */
+
+/*package whatever //do not write package name here */
+
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+import java.util.Scanner;
+class GFG 
+{
+	public static void main (String[] args) 
+	{
+		Scanner input = new Scanner(System.in);
+		int t=input.nextInt();
+		while( t > 0 )
+		{
+		    t--;
+		    String s1= input.next();
+		    char[] s11 = s1. toCharArray();
+		    char s2[] = new char[100];
+		    int dp[][] =  new int[100][100];
+		    int n=s1.length();
+		    for( int i = n-1 ; i >= 0 ; i-- )
+		    {
+		        s2[n-1-i] = s11[i];
+		    }
+		    for( int i = 0 ; i <= n ; i++ )
+		    {
+		        for( int j = 0 ; j <= n ; j++ )
+		        {
+		            if( i == 0 || j == 0 )
+		            {
+		                dp[i][j] = 0 ;
+		            }else if( s11[i-1] == s2[j-1] )
+		            {
+		                dp[i][j] = dp[i-1][j-1] + 1 ;
+		            }else 
+		            {
+		                dp[i][j] = Math.max( dp[i-1][j] , dp[i][j-1] ) ;
+		            }
+		        }
+	     	}
+	     	System.out.print( n-dp[n][n] );
+	     	System.out.println();
+	    }
+	}
+}
