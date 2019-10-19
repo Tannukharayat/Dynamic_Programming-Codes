@@ -1,0 +1,52 @@
+/*Given a string you have to transform it into a palindrome . In order to acheive that you have to perform exactly k insertion of
+characters(you cannot perform any more or less number of insertions).Now you have to report whether the string can be converted to a 
+palindrome by making exactly k insertions */
+
+
+ import java.util.*;
+import java.lang.*;
+import java.io.*;
+import java.util.Scanner;
+class GFG 
+{
+	public static void main (String[] args) 
+	{
+		Scanner input = new Scanner(System.in);
+		int t=input.nextInt();
+		while( t > 0 )
+		{
+		    t--;
+		    int n = input.nextInt();
+		    int k = input.nextInt();
+		    String s1= input.next();
+		    char[] s11 = s1. toCharArray();
+		    char s2[] = new char[1001];
+		    int dp[][] =  new int[1001][1001];
+		    for( int i = n-1 ; i >= 0 ; i-- )
+		    {
+		        s2[n-1-i] = s11[i];
+		    }
+		    for( int i = 0 ; i <= n ; i++ )
+		    {
+		        for( int j = 0 ; j <= n ; j++ )
+		        {
+		            if( i == 0 || j == 0 )
+		            {
+		                dp[i][j] = 0 ;
+		            }else if( s11[i-1] == s2[j-1] )
+		            {
+		                dp[i][j] = dp[i-1][j-1] + 1 ;
+		            }else 
+		            {
+		                dp[i][j] = Math.max( dp[i-1][j] , dp[i][j-1] ) ;
+		            }
+		        }
+	     	}
+	     	//System.out.println(dp[n][n]);
+	     	if( k >= ( n-dp[n][n] ) )
+	     	{
+	     	     System.out.println("YES");
+	     	}else System.out.println("NO");
+	    }
+	}
+}
